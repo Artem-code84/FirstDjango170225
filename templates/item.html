@@ -26,16 +26,16 @@
     <a href="/">Home</a>|<a href="/items">Items</a>|<a href="/about">About</a>
 </nav>
 <div class="container">
-    <h1>{{ name }}</h1>
+    <h1>{{ item.name }}</h1>
     <p>
-        Наименование: <strong>{{ name }}</strong>
+        Наименование: <strong>{{ item.name }}</strong>
     </p>
     <p>
         Количество:
-        {% if quantity == 0 %}
+        {% if item.count == 0 %}
             товар отсутствует
         {% else %}
-            {{ quantity }} шт.
+            {{ item.count }} шт.
         {% endif %}
     </p>
 <a href="/items"><-Назад</a>

@@ -1,4 +1,7 @@
+from MainApp.models import Item
 from django.shortcuts import render, HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseNotFound
 
 items = [
     {"id": 1, "name": "Кроссовки abibas", "quantity": 5},
@@ -24,11 +27,19 @@ def about(request):
 
 
 def items_list(request):
+    items = Item.objects.all()
     context = {"items": items}
     return render(request, "items.html", context)
 
 
 def item_page(request, id):
-    for item in items:
-        if item["id"] == id:
-            return render(request, "item.html", item)
+    # 200 OK
+    # 404 NOT FOUND
+    try:
+        item = Item.objects.get(id=id)
+    except ObjectDoesNotExist:
+        return HttpResponseNotFound(f"Товар с id={id} не найден")
+    context = {
+        "item": item
+    }
+    return render(request, "item.html", context)
