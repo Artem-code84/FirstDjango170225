@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="ru">
 <head>
@@ -10,15 +11,15 @@
             {# тут будет название страницы #}
         {% endblock %}
     </title>
-    <style>
-        {% block style %}
-            {# тут будут стили для каждой страницы #}
-        {% endblock %}
-    </style>
+
+    {% block style %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        {# тут будут стили для каждой страницы #}
+    {% endblock %}
 </head>
 <body>
 <nav>
-    <a href="/">🏠Домой</a>|<a href="/items">📄Items</a>|<a href="/about">About</a>
+    <a href="{% url 'home' %}">🏠Домой</a>|<a href="{% url 'items-list' %}">📄Items</a>|<a href="{% url 'about' %}">About</a>
 </nav>
 {% block content %}
     {# тут будет содержимое для каждой страницы #}
