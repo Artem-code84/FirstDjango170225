@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Создать товар
+{% endblock %}
+
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/form_create.css' %}">
+{% endblock %}
+
+{% block content %}
+    <hr>
+    <form action="{% url 'item-add' %}" method="post">
+    {% csrf_token %}
+        <label for="name">Название:</label>
+        <input type="text" name="name">
+        <label>Бренд:</label>
+        <input type="text" name="brand">
+        <label>Количество товара:</label>
+        <input type="number" name="count">
+
+        <textarea name="description" cols="30" rows="5">
+        </textarea>
+
+        <input type="submit" value="Создать товар">
+    </form>
+{% endblock %}

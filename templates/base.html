@@ -19,7 +19,10 @@
 </head>
 <body>
 <nav>
-    <a href="{% url 'home' %}">🏠Домой</a>|<a href="{% url 'items-list' %}">📄Items</a>|<a href="{% url 'about' %}">About</a>
+    <a href="{% url 'home' %}">🏠Домой</a>|
+    <a href="{% url 'items-list' %}">📄Items</a>|
+    <a href="{% url 'item-add' %}">Create</a>|
+    <a href="{% url 'about' %}">About</a>
 </nav>
 {% block content %}
     {# тут будет содержимое для каждой страницы #}

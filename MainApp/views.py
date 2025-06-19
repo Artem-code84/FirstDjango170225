@@ -1,5 +1,5 @@
 from MainApp.models import Item
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseNotFound
 
@@ -43,3 +43,18 @@ def item_page(request, id):
         "item": item
     }
     return render(request, "item.html", context)
+
+
+def item_add(request):
+    if request.method == "GET": # страницу с формой
+        return render(request, 'create_item.html')
+    elif request.method == "POST": # данные от формы
+        name = request.POST.get("name")
+        brand = request.POST.get("brand")
+        count = request.POST.get("count")
+        description = request.POST.get("description")
+
+        item = Item(name=name, brand=brand, count=count, description=description)
+        item.save()
+
+        return redirect('items-list')
