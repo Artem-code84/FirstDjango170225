@@ -6,22 +6,23 @@
 
 {% block content %}
     <div class="container">
-    <h1>{{ item.name }}</h1>
-    <p>
-        Наименование: <strong>{{ item.name }}</strong>
-    </p>
-    <p>
-        Количество:
-{#        {% if item.count == 0 %}#}
-{#            товар отсутствует#}
-{#        {% else %}#}
-{#            {{ item.count }} шт.#}
-{#        {% endif %}#}
-        {{ item.count | default:'товар отсутствует' }}
-    </p>
-    <p>
-        {{ item.description }}
-    </p>
-<a href="{% url 'items-list' %}"><-Назад</a>
-</div>
+        <h1>{{ item.name }}</h1>
+        <p>
+            Наименование: <strong>{{ item.name }}</strong>
+        </p>
+        <p>
+            Количество:
+            {{ item.count | default:'товар отсутствует' }}
+        </p>
+        Цвета:
+        <ol>
+            {% for color in item.colors.all %}
+                <li>{{ color.name }}</li>
+            {% endfor %}
+        </ol>
+        <p>
+            {{ item.description }}
+        </p>
+        <a href="{% url 'items-list' %}"><-Назад</a>
+    </div>
 {% endblock %}
